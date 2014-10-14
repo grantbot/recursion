@@ -5,24 +5,27 @@
 
 // But instead we're going to implement it from scratch:
 
+/*
 //Polyfill for string.contains prototype, found in Harmony ECMAScript 6 proposal.
 //See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/contains
-//Could have defined a standalone function but this is cleaner.
+//I originally used this with element.className, instead of element.classList
 if (!String.prototype.contains) {
     String.prototype.contains = function() {
         return String.prototype.indexOf.apply(this, arguments) !== -1;
     };
 }
+*/
 
 var getElementsByClassName = function(targetClass, element){
     var element = element || document;
     var result = []; //Returns empty array (which concats into nothing) if targetClass isn't found
    
+    console.log(element.classList);
     //If the target class applies to the current element, push the element
     //to the results array
-    if (element.className && element.className.contains(targetClass)) {
+    if (element.classList && element.classList.contains(targetClass)) {
         result.push(element);
-    } 
+    }
 
     //If the current element has children, make recursive calls to all of its
     //children and concatenate the results with the main results array.
